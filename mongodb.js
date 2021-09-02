@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 
 const url = 'mongodb://localhost:27017';
 const databaseName = 'task-manager';
@@ -13,8 +13,12 @@ MongoClient.connect(url, { useNewUrlParser: true }, (error, client) => {
 	const usersCollection = db.collection('users');
 	const tasksCollection = db.collection('tasks');
 
-	usersCollection.find({ age: 25 }).toArray((error, users) => {
-		if (error) return console.error('unable to find users');
-		console.log(users);
-	});
+	usersCollection
+		.deleteMany({ age: 25 })
+		.then((result) => {
+			console.log(result);
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 });
