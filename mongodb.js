@@ -13,8 +13,8 @@ MongoClient.connect(url, { useNewUrlParser: true }, (error, client) => {
 	const usersCollection = db.collection('users');
 	const tasksCollection = db.collection('tasks');
 
-	usersCollection.find({age:25}).toArray((error,users)=>{
-        if(error) return console.error("unable to find users");
-        console.log(users);
-    })
+	usersCollection.find({ age: 25 }).toArray((error, users) => {
+		if (error) return console.error('unable to find users');
+		console.log(users);
+	});
 });
