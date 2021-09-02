@@ -9,9 +9,12 @@ MongoClient.connect(url, { useNewUrlParser: true }, (error, client) => {
 	}
 	console.log('Connected correctly!!!');
 	const db = client.db(databaseName);
-	db.collection('users').insertOne({
-		name: 'ali',
-		age: 25,
-	});
-	// client.close();
+
+	const usersCollection = db.collection('users');
+	const tasksCollection = db.collection('tasks');
+
+	usersCollection.find({age:25}).toArray((error,users)=>{
+        if(error) return console.error("unable to find users");
+        console.log(users);
+    })
 });
